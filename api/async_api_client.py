@@ -15,7 +15,7 @@ from api.api_endpoint_config import (
 )
 from api.exceptions import ApiException
 from model.set import Set, SetDescription, SetDescriptionList
-from model.user import UserDescription, UserDescriptionList
+from model.user import User, UserDescription, UserDescriptionList
 
 RequestParameters: TypeAlias = (
     QueryParams
@@ -45,13 +45,25 @@ class AsyncApiClient:
         )
         return await self._get_and_validate(request_url, UserDescription)
 
-    async def get_user_by_id(self, user_id: str) -> UserDescription:
+    async def get_user_by_id(self, user_id: str) -> User:
         request_url = _construct_request_url(self._root_url, GET_USER_BY_ID, user_id)
-        return await self._get_and_validate(request_url, UserDescription)
+        return await self._get_and_validate(request_url, User)
 
-    async def get_users(self) -> list[UserDescription]:
+    async def get_users(self) -> list[User]:
+        user_descriptions = await self.get_user_descriptions()
+        user_ids = map(lambda user_description: user_description.id, user_descriptions)
+        get_user_coroutines = list(
+            map(lambda set_id: self.get_user_by_id(set_id), user_ids)
+        )
+        return await asyncio.gather(*get_user_coroutines)
+
+    async def get_user_descriptions(self) -> list[UserDescription]:
         request_url = _construct_request_url(self._root_url, GET_USERS)
         return (await self._get_and_validate(request_url, UserDescriptionList)).Users
+
+    async def get_users_by_ids(self, ids: list[str]) -> list[User]:
+        get_user_coroutines = map(lambda user_id: self.get_user_by_id(user_id), ids)
+        return await asyncio.gather(*get_user_coroutines)
 
     async def get_set_descriptions(self) -> list[SetDescription]:
         request_url = _construct_request_url(self._root_url, GET_SETS)

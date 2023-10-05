@@ -15,7 +15,7 @@ class TestAsyncApiClient(TestCase):
         cls._client = AsyncApiClient(ROOT_URL)
 
     def test_get_users(self) -> None:
-        users = run_async(self._client.get_users())
+        users = run_async(self._client.get_user_descriptions())
         assert len(users) > 0
         for user in users:
             assert isinstance(user, UserDescription)

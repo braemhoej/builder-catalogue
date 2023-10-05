@@ -18,7 +18,9 @@ class User(UserDescription):
 
     def __init__(self, **kw: Any) -> None:
         super().__init__(**kw)
-        self._mapped_collection = MappedCollection(self.collection)
+        self._mapped_collection = MappedCollection.from_collection_entries(
+            self.collection
+        )
 
     def get_mapped_collection(self) -> MappedCollection:
         return self._mapped_collection
