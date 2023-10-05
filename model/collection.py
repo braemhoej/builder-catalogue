@@ -22,4 +22,3 @@ class MappedCollection:
                 design_entry.setdefault(variant_entry.color, 0)
                 design_entry[variant_entry.color] += variant_entry.count
             self.entries[collection_entry.pieceId] = design_entry
-

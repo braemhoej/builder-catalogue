@@ -10,8 +10,5 @@ async def health() -> Response:
 
 
 @router.get("/user/{user_id}/sets")
-async def get_sets_by_user(
-        user_id: str,
-        allow_substitutions = False
-) -> Response:
+async def get_sets_by_user(user_id: str, allow_substitutions: bool = False) -> Response:
     return Response(status_code=200)

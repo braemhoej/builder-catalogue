@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 from model.collection import CollectionEntry, MappedCollection
@@ -14,7 +16,7 @@ class User(UserDescription):
     collection: list[CollectionEntry]
     _mapped_collection: MappedCollection
 
-    def __init__(self, **kw):
+    def __init__(self, **kw: Any) -> None:
         super().__init__(**kw)
         self._mapped_collection = MappedCollection(self.collection)
 

@@ -14,7 +14,7 @@ class TestAsyncApiClient(TestCase):
     def setUpClass(cls) -> None:
         cls._client = AsyncApiClient(ROOT_URL)
 
-    def test_get_users(self):
+    def test_get_users(self) -> None:
         users = run_async(self._client.get_users())
         assert len(users) > 0
         for user in users:
@@ -24,7 +24,7 @@ class TestAsyncApiClient(TestCase):
             assert isinstance(user.location, str)
             assert isinstance(user.brickCount, int)
 
-    def test_get_user(self):
+    def test_get_user(self) -> None:
         user = run_async(self._client.get_user_by_username("brickfan35"))
         assert isinstance(user, UserDescription)
         assert user.username == "brickfan35"
@@ -32,7 +32,7 @@ class TestAsyncApiClient(TestCase):
         assert user.brickCount == 1413
         assert user.location == "UKY"
 
-    def test_get_set_summaries(self):
+    def test_get_set_summaries(self) -> None:
         sets = run_async(self._client.get_set_descriptions())
         assert len(sets) > 0
         for s in sets:
@@ -43,7 +43,7 @@ class TestAsyncApiClient(TestCase):
             assert isinstance(s.setNumber, str)
             assert isinstance(s.totalPieces, int)
 
-    def test_get_set_summary(self):
+    def test_get_set_summary(self) -> None:
         s = run_async(self._client.get_set_description("alien-spaceship"))
         assert isinstance(s, SetDescription)
         assert s.name == "alien-spaceship"
@@ -51,7 +51,7 @@ class TestAsyncApiClient(TestCase):
         assert s.setNumber == "497XX"
         assert s.totalPieces == 1050
 
-    def test_get_set(self):
+    def test_get_set(self) -> None:
         s = run_async(self._client.get_set("040f11ab-e301-4724-bacd-50841816e06b"))
         assert isinstance(s, Set)
         assert s.id == "040f11ab-e301-4724-bacd-50841816e06b"
@@ -63,4 +63,3 @@ class TestAsyncApiClient(TestCase):
             count = part_count.quantity
             assert part is not None
             assert count > 0
-
