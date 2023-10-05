@@ -1,5 +1,3 @@
-princh-wild-rabbit
-
 fastapi
 python-multipart
 uvicorn[standard]
