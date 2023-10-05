@@ -1,0 +1,9 @@
+princh-wild-rabbit
+
+fastapi
+python-multipart
+uvicorn[standard]
+gunicorn
+
+python-jose[cryptography]
+httpx

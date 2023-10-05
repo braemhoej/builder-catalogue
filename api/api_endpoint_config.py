@@ -1,0 +1,7 @@
+ROOT_URL = "https://d16m5wbro86fg2.cloudfront.net"
+GET_USER_BY_USERNAME = "api/user/by-username"
+GET_USER_BY_ID = "api/user/by-id"
+GET_USERS = "api/users"
+GET_SETS = "api/sets"
+GET_SET_BY_NAME = "api/set/by-name"
+GET_SET_BY_ID = "api/set/by-id"
