@@ -2,9 +2,7 @@ from pydantic import BaseModel
 
 
 class VariantEntry(BaseModel):
-    # Ideally the type of the 'color' field should be subtype of Enum, either constructed manually, or fetched from
-    # another service and constructed dynamically, i.e. material-registry
-    color: str
+    color: int  # Note: pydantic supports automatic conversion from int to str, i.e. "123" -> 123
     count: int
 
 
@@ -14,7 +12,7 @@ class CollectionEntry(BaseModel):
 
 
 class MappedCollection:
-    entries: dict[str, dict[str, int]]
+    entries: dict[str, dict[int, int]]
 
     def __init__(self, collection_entries: list[CollectionEntry]):
         for collection_entry in collection_entries:

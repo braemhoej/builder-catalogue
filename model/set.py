@@ -4,6 +4,7 @@ from model.part import PartEntry
 
 
 class SetDescription(BaseModel):
+    # Further validation could be imposed on both the id and setNumber fields.
     id: str
     name: str
     setNumber: str
